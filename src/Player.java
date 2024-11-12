@@ -129,8 +129,8 @@ public class Player {
         sortedList = players;
         for(int i = 0; i < size; i++){
                 for(int j = 0; j < size-i-1; j++){
-                    rating = (stats.getMinsPlayed() / players.get(j).injuryProneRating) * players.get(j).performanceRating;
-                    rating2 = (stats.getMinsPlayed() / players.get(j+1).injuryProneRating) * players.get(j+1).performanceRating;
+                    rating = players.get(j).performanceRating/4- (players.get(j).injuryProneRating/stats.getMinsPlayed()) ;
+                    rating2 = players.get(j+1).performanceRating/4-(players.get(j+1).injuryProneRating/stats.getMinsPlayed());
                     if(rating > rating2){
                         temp.add(sortedList.get(j));
                         sortedList.set(j,sortedList.get(j+1));
