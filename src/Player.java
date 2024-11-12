@@ -121,19 +121,27 @@ public class Player {
     public static List<Player> sortPlayers(List<Player> players, InMatchStats stats){
         int size = players.size();
         double rating = 0;
+        double rating2 = 0;
+
         double highestRating=0;
         List<Player> sortedList = new ArrayList<Player>();
+        List<Player> temp = new ArrayList<Player>();
+        sortedList = players;
         for(int i = 0; i < size; i++){
-            rating = (stats.getMinsPlayed() / players.get(i).injuryProneRating) * players.get(i).performanceRating;
-            if(rating > highestRating){
-                highestRating = rating;
-                sortedList.size();
-                for(int j = 0; j < sortedList.size(); j++){
-                    sortedList.add(j-1, sortedList.get(j-1));
+                for(int j = 0; j < size-i-1; j++){
+                    rating = (stats.getMinsPlayed() / players.get(j).injuryProneRating) * players.get(j).performanceRating;
+                    rating2 = (stats.getMinsPlayed() / players.get(j+1).injuryProneRating) * players.get(j+1).performanceRating;
+                    if(rating > rating2){
+                        temp.add(sortedList.get(j));
+                        sortedList.set(j,sortedList.get(j+1));
+                        sortedList.set(j+1,temp.get(0));
+                        temp.clear();
+                    }
+
                 }
-                sortedList.set(0, players.get(i));
             }
-        }
         return sortedList;
+        }
     }
-}
+
+
