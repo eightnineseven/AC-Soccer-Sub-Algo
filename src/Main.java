@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 
 public class Main {
+    public static boolean validInput = false;
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int selection = Utility.DEFAULT;
@@ -12,10 +13,21 @@ public class Main {
             switch (selection) {
                 case (Utility.BEGIN):
                     System.out.println("Match Begun!");
-                    int numberOfPlayers;
-                    System.out.print("How many players are on the squad: ");
-                    numberOfPlayers = scanner.nextInt();
                     System.out.println("Please import player stats below: ");
+                    int numberOfPlayers = 0;
+                    System.out.print("How many players are on the squad: ");
+                    validInput = false;
+                    while(!validInput) {
+                        try {
+                            numberOfPlayers = scanner.nextInt();
+                            validInput = true;
+                        } catch(Exception e){
+                            System.out.print("Please input the number of players on squad: ");
+                            validInput = false;
+                        }finally{
+                            scanner.nextLine();
+                        }
+                    }
                    //get and store player stats
                     Player.addPlayers(numberOfPlayers, scanner);
 
@@ -37,6 +49,7 @@ public class Main {
                     selection=Utility.DEFAULT;
                     break;
                 case (Utility.DEFAULT):
+                    validInput = false;
                     System.out.println();
                     System.out.println("Welcome to the substitution optimizer!");
                     System.out.println("Which of the following would you like to do?");
@@ -45,8 +58,16 @@ public class Main {
                     System.out.println("3. Make a substitution");
                     System.out.println("4. End the optimizer");
                     System.out.print("Selection: ");
+                    try {
+                        selection = scanner.nextInt();
+                        validInput = true;
+                    } catch(Exception e){
+                        System.out.println("Please input your desired choice!");
+                        validInput = false;
+                    } finally{
+                        scanner.nextLine();
+                }
 
-                    selection = scanner.nextInt();
                 break;
             }
         }

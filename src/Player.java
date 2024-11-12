@@ -6,6 +6,7 @@ public class Player {
     double performanceRating;
     int jerseyNumber;
     String playerName;
+    public static boolean validInput = false;
     public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName){
         this.position = position;
         this.injuryProneRating = injuryProneRating;
@@ -22,37 +23,96 @@ public class Player {
         for(int i=0; i <numberOfPlayers; i++) {
             //add try catch or while for each of these to make sure correct data type is entered so we dont terminate code.
             System.out.print("Player name: ");
-            Utility.nameOfPlayer = scanner.next();
+            while(!validInput) {
+                try {
 
-
-            System.out.print("Player number: ");
-            Utility.numberOfPlayer = scanner.nextInt();
-
-                System.out.print("Player Position (1 for defender, 2 for midfielder, and 3 for forward: ");
-                int posNumb = scanner.nextInt();
-                if (posNumb == 1) {
-                    Utility.positionOfPlayer = Utility.Position.FORWARD;
-                } else if (posNumb == 2) {
-                    Utility.positionOfPlayer = Utility.Position.MIDFIELDER;
-                } else if (posNumb == 3) {
-                    Utility.positionOfPlayer = Utility.Position.DEFENDER;
+                    Utility.nameOfPlayer = scanner.next();
+                    validInput = true;
+                } catch (Exception e) {
+                    System.out.println("Please input a name: ");
+                } finally{
+                    scanner.nextLine();
                 }
+            }
+            validInput = false;
+
+                System.out.print("Player number: ");
+                while(!validInput) {
+                    try {
+
+                        Utility.numberOfPlayer = scanner.nextInt();
+                        validInput = true;
+                    } catch (Exception e) {
+                        validInput = false;
+                        System.out.print("Please input the player's number: ");
+                    } finally{
+                        scanner.nextLine();
+                    }
+                }
+                validInput = false;
+            System.out.print("Player Position (1 for defender, 2 for midfielder, and 3 for forward: ");
+            while(!validInput) {
+                try {
+
+                    int posNumb = scanner.nextInt();
+                    if (posNumb == 1) {
+                        Utility.positionOfPlayer = Utility.Position.FORWARD;
+                    } else if (posNumb == 2) {
+                        Utility.positionOfPlayer = Utility.Position.MIDFIELDER;
+                    } else if (posNumb == 3) {
+                        Utility.positionOfPlayer = Utility.Position.DEFENDER;
+                    }
+                    if (posNumb > 3 || posNumb < 1) {
+
+                        Exception Exception = new Exception();
+                        throw Exception;
+                    }
+                    validInput = true;
+                } catch (Exception e) {
+                    validInput = false;
+                    System.out.print("Please input the player position as either a 1, 2, or 3: ");
+                } finally{
+                    scanner.nextLine();
+                }
+            }
+            validInput = false;
 
             System.out.print("Injury Rating of player: ");
-            Utility.injuryRatingOfPlayer = scanner.nextDouble();
+            while(!validInput) {
+                try{
+                    Utility.injuryRatingOfPlayer = scanner.nextDouble();
+                    validInput = true;
+                }catch(Exception e){
+                    System.out.print("Please input the injury rating: ");
+                    validInput = false;
+                } finally{
+                    scanner.nextLine();
+                }
 
+            }
+            validInput = false;
 
             System.out.print("Performance rating of player: ");
-            Utility.performanceRatingOfPlayer = scanner.nextDouble();
+            while(!validInput) {
+                try {
+                    Utility.performanceRatingOfPlayer = scanner.nextDouble();
 
-            Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer);
-            if (player.getPosition().equals(Utility.Position.FORWARD)) {
-                Utility.forwards.add(player);
-            } else if (player.getPosition().equals(Utility.Position.MIDFIELDER)) {
-                Utility.midfielders.add(player);
-            } else {
-                Utility.defenders.add(player);
+                    Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer);
+                    if (player.getPosition().equals(Utility.Position.FORWARD)) {
+                        Utility.forwards.add(player);
+                    } else if (player.getPosition().equals(Utility.Position.MIDFIELDER)) {
+                        Utility.midfielders.add(player);
+                    } else {
+                        Utility.defenders.add(player);
 
+                    }
+                    validInput = true;
+                } catch(Exception e){
+                    System.out.print("Please input the performance rating of player: ");
+                    validInput = false;
+                } finally{
+                    scanner.nextLine();
+                }
             }
         }
     }
