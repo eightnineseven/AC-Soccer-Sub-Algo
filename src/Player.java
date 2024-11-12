@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
@@ -115,5 +117,23 @@ public class Player {
                 }
             }
         }
+    }
+    public static List<Player> sortPlayers(List<Player> players, InMatchStats stats){
+        int size = players.size();
+        double rating = 0;
+        double highestRating=0;
+        List<Player> sortedList = new ArrayList<Player>();
+        for(int i = 0; i < size; i++){
+            rating = (stats.getMinsPlayed() / players.get(i).injuryProneRating) * players.get(i).performanceRating;
+            if(rating > highestRating){
+                highestRating = rating;
+                sortedList.size();
+                for(int j = 0; j < sortedList.size(); j++){
+                    sortedList.add(j-1, sortedList.get(j-1));
+                }
+                sortedList.set(0, players.get(i));
+            }
+        }
+        return sortedList;
     }
 }
