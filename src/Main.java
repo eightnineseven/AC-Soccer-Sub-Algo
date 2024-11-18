@@ -32,6 +32,17 @@ public class Main {
                     Player.addPlayers(numberOfPlayers, scanner);
 
                     System.out.println("Please import pre match stats below: ");
+                    System.out.println("Please input the starting team formation:")
+                    String teamFormation = scanner.nextLine()
+
+                    System.out.println("Please input the opponent formation:")
+                    String oppFormation = scanner.nextLine()
+
+                    System.out.println("Please input weather conditions (Sunny/Raining):") // Not sure if we really need this but maybe it would affect whether defense or offense is better?
+                    String weather = scanner.nextLine()
+
+                    PrematchStats preMatchStats = new PrematchStats(teamFormation, oppFormation, weather);
+                    //get and store the prematch stats
                     //get and store the prematch stats
                     selection=Utility.DEFAULT;
                     break;
