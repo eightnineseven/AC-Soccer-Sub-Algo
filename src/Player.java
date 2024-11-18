@@ -9,18 +9,30 @@ public class Player {
     int jerseyNumber;
     String playerName;
     public static boolean validInput = false;
+    private int passingRating;
+    private int shootingRating;
+    private int defRating;
+
     public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName){
         this.position = position;
         this.injuryProneRating = injuryProneRating;
         this.performanceRating = performanceRating;
         this.jerseyNumber = jerseyNumber;
         this.playerName = playerName;
+        this.passingRating = passingRating;
+        this.shootingRating = shootingRating;
+        this.defRating = defRating;
     }
+
     public Utility.Position getPosition(){return this.position;}
     public String getPlayerName(){return this.playerName;}
     public int getJerseyNumber(){return this.jerseyNumber;}
     public double getInjuryProneRating(){return injuryProneRating;}
     public double getPerformanceRating(){return performanceRating;}
+    public int getPassingRating(){return this.passingRating;}
+    public int getShootingRating(){return this.shootingRating;}
+    public int getDefRating(){return this.defRating;}
+
     public static void addPlayers(int numberOfPlayers, Scanner scanner){
         for(int i=0; i <numberOfPlayers; i++) {
             //add try catch or while for each of these to make sure correct data type is entered so we dont terminate code.
