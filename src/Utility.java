@@ -33,4 +33,5 @@ public class Utility {
     public static final int END = 4;
     public static final int DEFAULT = 5;
     public static boolean continueSubs = true;
+    public static int[] formation = new int[3];
 }
