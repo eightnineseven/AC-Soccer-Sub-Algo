@@ -9,11 +9,11 @@ public class Player {
     int jerseyNumber;
     String playerName;
     public static boolean validInput = false;
-    private int passingRating;
-    private int shootingRating;
-    private int defRating;
+    private double passingRating;
+    private double shootingRating;
+    private double dribblingRating;
 
-    public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName){
+    public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName, double passingRating, double shootingRating, double dribblingRating){
         this.position = position;
         this.injuryProneRating = injuryProneRating;
         this.performanceRating = performanceRating;
@@ -21,7 +21,7 @@ public class Player {
         this.playerName = playerName;
         this.passingRating = passingRating;
         this.shootingRating = shootingRating;
-        this.defRating = defRating;
+        this.dribblingRating = dribblingRating;
     }
 
     public Utility.Position getPosition(){return this.position;}
@@ -29,9 +29,9 @@ public class Player {
     public int getJerseyNumber(){return this.jerseyNumber;}
     public double getInjuryProneRating(){return injuryProneRating;}
     public double getPerformanceRating(){return performanceRating;}
-    public int getPassingRating(){return this.passingRating;}
-    public int getShootingRating(){return this.shootingRating;}
-    public int getDefRating(){return this.defRating;}
+    public double getPassingRating(){return this.passingRating;}
+    public double getShootingRating(){return this.shootingRating;}
+    public double getdribblingRating(){return this.dribblingRating;}
 
     public static void addPlayers(int numberOfPlayers, Scanner scanner){
         for(int i=0; i <numberOfPlayers; i++) {
@@ -105,13 +105,54 @@ public class Player {
 
             }
             validInput = false;
+            System.out.print("Dribbling Rating of player: ");
+            while(!validInput){
+                try{
+                    Utility.dribblingRatingOfPlayer = scanner.nextDouble();
+                    validInput = true;
+                } catch (Exception e){
+                    System.out.print("Please input the dribbling rating: ");
+                    validInput = false;
+
+                } finally{
+                    scanner.nextLine();
+                }
+            }
+            validInput = false;
+            System.out.print("Shooting Rating of player: ");
+            while(!validInput){
+                try{
+                    Utility.shootingRatingOfPlayer = scanner.nextDouble();
+                    validInput = true;
+                } catch (Exception e){
+                    System.out.print("Please input the shooting rating: ");
+                    validInput = false;
+
+                } finally{
+                    scanner.nextLine();
+                }
+            }
+            validInput = false;
+            System.out.print("Passing Rating of player: ");
+            while(!validInput){
+                try{
+                    Utility.passingRatingOfPlayer = scanner.nextDouble();
+                    validInput = true;
+                } catch (Exception e){
+                    System.out.print("Please input the passing rating: ");
+                    validInput = false;
+                } finally{
+                    scanner.nextLine();
+                }
+            }
+            validInput = false;
 
             System.out.print("Performance rating of player: ");
             while(!validInput) {
                 try {
                     Utility.performanceRatingOfPlayer = scanner.nextDouble();
 
-                    Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer);
+                    Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer, Utility.passingRatingOfPlayer, Utility.shootingRatingOfPlayer, Utility.dribblingRatingOfPlayer);
                     if (player.getPosition().equals(Utility.Position.FORWARD)) {
                         Utility.forwards.add(player);
                     } else if (player.getPosition().equals(Utility.Position.MIDFIELDER)) {
@@ -128,6 +169,7 @@ public class Player {
                     scanner.nextLine();
                 }
             }
+
         }
     }
     public static List<Player> sortPlayers(List<Player> players, InMatchStats stats){
@@ -141,8 +183,8 @@ public class Player {
         sortedList = players;
         for(int i = 0; i < size; i++){
                 for(int j = 0; j < size-i-1; j++){
-                    rating = players.get(j).performanceRating/4- (players.get(j).injuryProneRating/stats.getMinsPlayed()) ;
-                    rating2 = players.get(j+1).performanceRating/4-(players.get(j+1).injuryProneRating/stats.getMinsPlayed());
+                    rating = players.get(j).performanceRating/4- (players.get(j).injuryProneRating/stats.getMinsPlayed() + players.get(j).dribblingRating + players.get(j).passingRating + players.get(j).shootingRating) ;
+                    rating2 = players.get(j+1).performanceRating/4-(players.get(j+1).injuryProneRating/stats.getMinsPlayed() + players.get(j+1).dribblingRating + players.get(j+1).passingRating + players.get(j+1).shootingRating);
                     if(rating > rating2){
                         temp.add(sortedList.get(j));
                         sortedList.set(j,sortedList.get(j+1));

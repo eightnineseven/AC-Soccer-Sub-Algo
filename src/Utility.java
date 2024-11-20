@@ -18,6 +18,9 @@ public class Utility {
     public static double injuryRatingOfPlayer;
     public static double performanceRatingOfPlayer;
     public static Position positionOfPlayer;
+    public static double passingRatingOfPlayer;
+    public static double dribblingRatingOfPlayer;
+    public static double shootingRatingOfPlayer;
 
 
 

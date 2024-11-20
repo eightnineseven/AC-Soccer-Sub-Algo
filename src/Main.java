@@ -28,6 +28,7 @@ public class Main {
                             scanner.nextLine();
                         }
                     }
+
                    //get and store player stats
                     Player.addPlayers(numberOfPlayers, scanner);
 
