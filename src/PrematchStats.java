@@ -1,9 +1,9 @@
 public class PrematchStats {
     private String teamFormation;
-    private String oppFormation;
+    private int[] oppFormation = new int[3];
     private String weather;
 
-    public PrematchStats(String teamFormation, String oppFormation, String weather) {
+    public PrematchStats(String teamFormation, int[] oppFormation, String weather) {
         this.teamFormation = teamFormation;
         this.oppFormation = oppFormation;
         this.weather = weather;
@@ -14,7 +14,7 @@ public class PrematchStats {
         return teamFormation;
     }
 
-    public String getOppFormation() {
+    public int[] getOppFormation() {
         return oppFormation;
     }
 

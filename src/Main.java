@@ -37,7 +37,13 @@ public class Main {
                     String teamFormation = scanner.nextLine();
 
                     System.out.println("Please input the opponent formation:");
-                    String oppFormation = scanner.nextLine();
+                    System.out.print("# of defenders: ");
+                    int oppDefenders = scanner.nextInt();
+                    System.out.print("# of midfielders: ");
+                    int oppMidfielders = scanner.nextInt();
+                    System.out.print("# of forwards: ");
+                    int oppForwards = scanner.nextInt();
+                    int[] oppFormation = {oppDefenders, oppMidfielders, oppForwards};
 
                     System.out.println("Please input weather conditions (Sunny/Raining):"); // Not sure if we really need this but maybe it would affect whether defense or offense is better?
                     String weather = scanner.nextLine();

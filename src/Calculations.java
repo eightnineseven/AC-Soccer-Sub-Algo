@@ -29,6 +29,7 @@ public class Calculations {
     }
     public void calculateSub(){
         int[] statsDiff = this.inMatch.statsDiff().clone();
+        int[] oppFormation = this.preMatch.getOppFormation().clone();
         String weather = this.preMatch.getWeather();
         int weatherEffect= 0;
         if(weather.equals("rainy")){
@@ -39,9 +40,9 @@ public class Calculations {
         int[] formation = new int[3];
         formation = Utility.formation;
         //goals, passes, shots
-        this.defenderIn = statsDiff[0]*200 +statsDiff[1]*0.2- statsDiff[2]*5 + weatherEffect*5;
-        this.forwardIn = -statsDiff[0]*200 - statsDiff[1]*0.2 + statsDiff[2]*3-weatherEffect*5;
-        this.midfielderIn = statsDiff[0]*50-statsDiff[1]*0.8 -statsDiff[2]*7;
+        this.defenderIn = statsDiff[0]*200 +statsDiff[1]*0.2- statsDiff[2]*5 + weatherEffect*5 -oppFormation[0]*4;
+        this.forwardIn = -statsDiff[0]*200 - statsDiff[1]*0.2 + statsDiff[2]*3-weatherEffect*5-oppFormation[2]*12;
+        this.midfielderIn = statsDiff[0]*50-statsDiff[1]*0.8 -statsDiff[2]*7-oppFormation[1]*8;
         Player.sortPlayers(Utility.forwards, this.inMatch);
         Player.sortPlayers(Utility.midfielders, this.inMatch);
         Player.sortPlayers(Utility.defenders, this.inMatch);
