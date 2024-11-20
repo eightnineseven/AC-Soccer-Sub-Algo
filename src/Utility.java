@@ -21,6 +21,7 @@ public class Utility {
     public static double passingRatingOfPlayer;
     public static double dribblingRatingOfPlayer;
     public static double shootingRatingOfPlayer;
+    public static double fatigueRatingOfPlayer;
 
 
 

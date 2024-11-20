@@ -12,8 +12,9 @@ public class Player {
     private double passingRating;
     private double shootingRating;
     private double dribblingRating;
+    private double fatigueRating;
 
-    public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName, double passingRating, double shootingRating, double dribblingRating){
+    public Player(Utility.Position position, double injuryProneRating, double performanceRating, int jerseyNumber, String playerName, double passingRating, double shootingRating, double dribblingRating, double fatigueRating){
         this.position = position;
         this.injuryProneRating = injuryProneRating;
         this.performanceRating = performanceRating;
@@ -22,6 +23,7 @@ public class Player {
         this.passingRating = passingRating;
         this.shootingRating = shootingRating;
         this.dribblingRating = dribblingRating;
+        this.fatigueRating = fatigueRating;
     }
 
     public Utility.Position getPosition(){return this.position;}
@@ -146,13 +148,26 @@ public class Player {
                 }
             }
             validInput = false;
+            System.out.print("Fatigue rating of player (0-1): ");
+            while(!validInput){
+                try{
+                    Utility.fatigueRatingOfPlayer = scanner.nextDouble();
+                    validInput = true;
+                } catch (Exception e){
+                    System.out.print("Please input the fatigue rating: ");
+                    validInput = false;
+                }finally{
+                    scanner.nextLine();
+                }
+            }
+            validInput = false;
 
             System.out.print("Performance rating of player: ");
             while(!validInput) {
                 try {
                     Utility.performanceRatingOfPlayer = scanner.nextDouble();
 
-                    Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer, Utility.passingRatingOfPlayer, Utility.shootingRatingOfPlayer, Utility.dribblingRatingOfPlayer);
+                    Player player = new Player(Utility.positionOfPlayer, Utility.injuryRatingOfPlayer, Utility.performanceRatingOfPlayer, Utility.numberOfPlayer, Utility.nameOfPlayer, Utility.passingRatingOfPlayer, Utility.shootingRatingOfPlayer, Utility.dribblingRatingOfPlayer, Utility.fatigueRatingOfPlayer);
                     if (player.getPosition().equals(Utility.Position.FORWARD)) {
                         Utility.forwards.add(player);
                     } else if (player.getPosition().equals(Utility.Position.MIDFIELDER)) {
@@ -183,8 +198,8 @@ public class Player {
         sortedList = players;
         for(int i = 0; i < size; i++){
                 for(int j = 0; j < size-i-1; j++){
-                    rating = players.get(j).performanceRating/4- (players.get(j).injuryProneRating/stats.getMinsPlayed() + players.get(j).dribblingRating + players.get(j).passingRating + players.get(j).shootingRating) ;
-                    rating2 = players.get(j+1).performanceRating/4-(players.get(j+1).injuryProneRating/stats.getMinsPlayed() + players.get(j+1).dribblingRating + players.get(j+1).passingRating + players.get(j+1).shootingRating);
+                    rating = (players.get(j).performanceRating/4- (players.get(j).injuryProneRating/stats.getMinsPlayed() + players.get(j).dribblingRating + players.get(j).passingRating + players.get(j).shootingRating)) /players.get(j).fatigueRating;
+                    rating2 = (players.get(j+1).performanceRating/4-(players.get(j+1).injuryProneRating/stats.getMinsPlayed() + players.get(j+1).dribblingRating + players.get(j+1).passingRating + players.get(j+1).shootingRating))/ players.get(j+1).fatigueRating;
                     if(rating > rating2){
                         temp.add(sortedList.get(j));
                         sortedList.set(j,sortedList.get(j+1));
